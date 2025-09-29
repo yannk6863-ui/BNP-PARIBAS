@@ -196,22 +196,18 @@
     }
 
     /* --- ALERT BOX --- */
-    .alert-box {
-      position: absolute;
-      top: 90px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color:rgb(14, 174, 14);
-      color: white;
-      padding: 25px 35px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      border-radius: 10px;
-      box-shadow: 0px 6px 18px rgba(0,0,0,0.3);
-      z-index: 10;
-      min-width: 420px;
-    }
+  .alert-box {
+  position: fixed; /* plutôt que absolute */
+  top: 60px;       /* laisse de la place pour le header mobile */
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 90%;
+  padding: 15px;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 12px;
+  z-index: 1000;  /* s’assure que ça reste au-dessus */
+}
 
     .alert-box img {
       width: 50px;
@@ -263,27 +259,41 @@
       height: 18px;
     }
 
-   @media (max-width: 768px) {
+ /* --- MOBILE (≤768px) --- */
+@media (max-width: 768px) {
+  /* Header */
   header {
     flex-direction: column;
     height: auto;
     padding: 10px 20px;
+    align-items: flex-start;
   }
   .header-left {
     gap: 10px;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
   }
   .logo img {
     height: 50px;
   }
+
+  /* Menu burger */
   nav {
-    flex-wrap: wrap;
+    display: none; /* menu caché par défaut */
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    padding: 10px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     gap: 10px;
-    margin-top: 10px;
     font-size: 12px;
-    justify-content: center;
   }
+  nav.show {
+    display: flex; /* menu visible quand burger cliqué */
+  }
+
+  /* User section */
   .user-section {
     flex-direction: row;
     align-items: center;
@@ -297,6 +307,8 @@
     font-size: 12px;
     padding: 4px 8px;
   }
+
+  /* Contenu principal */
   .content {
     padding: 15px;
     margin-top: 50px;
@@ -316,9 +328,13 @@
     font-size: 16px;
     margin-bottom: 20px;
   }
+
+  /* Separator */
   .separator::before, .separator::after {
     max-width: 120px;
   }
+
+  /* Account box */
   .account-box {
     padding: 15px;
   }
@@ -335,6 +351,8 @@
     text-align: center;
     margin-left: 0;
   }
+
+  /* Floating buttons */
   .floating-buttons {
     bottom: 15px;
     right: 15px;
@@ -349,15 +367,20 @@
     width: 14px;
     height: 14px;
   }
+
+  /* Alert box */
   .alert-box {
-    top: 10px;
+    position: fixed; /* ne recouvre pas le header en scroll */
+    top: 70px;       /* espace sous le header */
     left: 50%;
     transform: translateX(-50%);
     min-width: 90%;
-    padding: 15px;
+    padding: 12px 15px;
     flex-direction: column;
     gap: 10px;
     font-size: 12px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
   .alert-box img {
     width: 40px;

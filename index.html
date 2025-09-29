@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="BNP.jpeg" type="image/x-icon">
+  <title>ACCESO - LCL</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      min-height: 865px;
+    }
+    .left {
+      width: 26%;
+      background: #fff;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 14px;
+      margin-top:1px;
+    }
+    h2 {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    .language-selector {
+      margin-bottom: 20px;
+      align-self: flex-end;
+    }
+    .language-selector select {
+      padding: 5px;
+      border-radius: 5px;
+    }
+    .right {
+      width: 100%;
+      background: url('https://monespace.lcl.fr/assets/images/login-page-background.jpg') no-repeat center center;
+      background-size: cover;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 30px;
+      text-align: center;
+    }
+    .logo {
+      margin-bottom: 10px;
+    }
+    .input-id {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .input-id input {
+      width: 25px;
+      height: 40px;
+      font-size: 20px;
+      text-align: center;
+      border: none;
+      border-bottom: 2px solid #ccc;
+      outline: none;
+    }
+    .input-id input:focus {
+      border-bottom: 2px solid #2a2ac0;
+    }
+    .remember {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #999;
+      border: none;
+      color: white;
+      border-radius: 25px;
+      cursor: not-allowed;
+      margin-bottom: 20px;
+      transition: background 0.3s;
+    }
+    button.active {
+      background: green;
+      cursor: pointer;
+    }
+    .links{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .links a {
+      padding-bottom: 1px;
+      text-decoration: underline;
+      text-decoration-color: #3b51d5;
+      text-underline-offset: 5px;
+      border-bottom: none;
+    }
+    .open-account {
+      margin-top: 15px;
+    }
+    .open-account a {
+      background: #2a2ac0;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .open-accounte{
+      margin-left: 25px;
+    }
+    .open-account p {
+      margin-bottom: 1px;
+    }
+    .open-account p a {
+      color: #232884;
+      text-decoration: underline;
+      background: none;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Partie Code Personnel corrigée */
+    #codePersonnel {
+      display: none;
+      text-align: center;
+    }
+    #codePersonnel h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #1F3688;
+    }
+    #dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid #333;
+    }
+    #numpad {
+  display: grid;
+  grid-template-columns: repeat(5, 40px);
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#numpad button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #f0f3ff;
+  font-size: 16px;
+  cursor: pointer;
+  color: black; /* noir pour les chiffres */
+}
+
+
+
+    #validateCode {
+      padding: 10px 20px;
+      border: none;
+      color: white;
+      border-radius: 25px;
+      background-color: #999;
+      cursor: not-allowed;
+      transition: background 0.3s;
+    }
+    #validateCode.active {
+      background-color: green;
+      cursor: pointer;
+    }
+     @media (max-width: 768px) {
+    body {
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .left {
+      width: 100%;
+      padding: 20px;
+      margin-top: 0;
+      font-size: 16px;
+    }
+    .right {
+      width: 100%;
+      min-height: 250px;
+      padding-bottom: 20px;
+    }
+    .input-id {
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .input-id input {
+      width: 20px;
+      height: 35px;
+      font-size: 18px;
+    }
+    #numpad {
+      grid-template-columns: repeat(4, 50px);
+      gap: 8px;
+    }
+    #numpad button {
+      width: 50px;
+      height: 50px;
+      font-size: 18px;
+    }
+    button, #validateCode {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 16px;
+    }
+    .open-account a {
+      padding: 12px 0;
+      font-size: 16px;
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
+    .language-selector {
+      align-self: center;
+      margin-bottom: 15px;
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="left">
+    <!-- Sélecteur de langue -->
+    <div class="language-selector">
+      <select id="langSelect">
+        <option value="es" selected>Español</option>
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+        <option value="sv">Svenska</option>
+        <option value="de">Deutsch</option>
+        <option value="pl">Polski</option>
+        <option value="it">Italiano</option>
+      </select>
+    </div>
+
+    <div class="logo">
+      <img src="BNP.jpeg" alt="LCL Logo" width="100">
+    </div>
+    <h2 id="title">Su identificador</h2>
+    <div class="input-id">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+    </div>
+    <label class="remember">
+      <input type="checkbox"> <span id="rememberText">Recordar mi identificador</span>
+    </label>
+    <button id="continueBtn">Continuar →</button>
+
+    <!-- ✅ Code personnel corrigé -->
+    <div id="codePersonnel" style="display:none;">
+      <h2 id="pinTitle">Su código personal</h2>
+      <div id="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div id="numpad"></div>
+      <button id="validateCode" disabled>Validar →</button>
+    </div>
+
+    <div class="links">
+      <a href="#" id="forgotId">¿Olvidó su identificador?</a> <br>
+      <a href="#" id="forgotPin">¿Olvidó su código personal?</a>
+    </div>
+    <div class="open-account">
+      <p><a href="#" id="notClient">¿Aún no es cliente?</a></p>
+      <a href="#" class="open-accounte" id="openAccount">Abrir una cuenta →</a>
+    </div>
+  </div>
+
+  <div class="right"></div>
+
+<script>
+  const inputs = document.querySelectorAll('.input-id input');
+  const button = document.getElementById('continueBtn');
+  const codeSection = document.getElementById('codePersonnel');
+  const numpad = document.getElementById('numpad');
+  const dots = document.querySelectorAll('#dots .dot');
+  const validateCodeBtn = document.getElementById('validateCode');
+
+  let code = []; // tableau des chiffres tapés
+
+  inputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+      if (input.value.length === 1 && index < inputs.length - 1) {
+        inputs[index + 1].focus();
+      }
+      checkInputs();
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === "Backspace" && input.value === "" && index > 0) {
+        inputs[index - 1].focus();
+      }
+    });
+  });
+
+  function checkInputs() {
+    const allFilled = Array.from(inputs).every(input => input.value.trim().length === 1);
+    if (allFilled) {
+      button.classList.add('active');
+      button.disabled = false;
+    } else {
+      button.classList.remove('active');
+      button.disabled = true;
+    }
+  }
+
+  button.addEventListener('click', () => {
+    if (!button.disabled) {
+      codeSection.style.display = 'block';
+      generateNumpad();
+    }
+  });
+
+  function generateNumpad() {
+    const digits = [1,2,3,4,5,6,7,8,9,0].sort(() => 0.5 - Math.random());
+    numpad.innerHTML = '';
+
+    digits.forEach(num => {
+      const btn = document.createElement('button');
+      btn.textContent = num;
+      btn.addEventListener('click', () => enterCode(num));
+      numpad.appendChild(btn);
+    });
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '←';
+    deleteBtn.addEventListener('click', () => {
+      if (code.length > 0) {
+        dots[code.length - 1].style.backgroundColor = 'transparent';
+        code.pop();
+        validateCodeBtn.disabled = true;
+        validateCodeBtn.classList.remove('active');
+        
+      }
+    });
+    numpad.appendChild(deleteBtn);
+  }
+
+  function enterCode(digit) {
+    if (code.length >= 6) return;
+
+    code.push(digit);
+    dots[code.length - 1].style.backgroundColor = '#1F3688';
+
+    if (code.length === 6) {
+      validateCodeBtn.disabled = false;
+      validateCodeBtn.classList.add('active');
+    }
+  }
+
+  validateCodeBtn.addEventListener('click', () => {
+    window.location.href = 'dashboard.html';
+  });
+</script>
+
+<script>
+  const translations = {
+    es: { title: "Su identificador", remember: "Recordar mi identificador", continue: "Continuar →", pinTitle: "Su código personal", validate: "Validar →", forgotId: "¿Olvidó su identificador?", forgotPin: "¿Olvidó su código personal?", notClient: "¿Aún no es cliente?", openAccount: "Abrir una cuenta →" },
+    fr: { title: "Votre identifiant", remember: "Se souvenir de mon identifiant", continue: "Continuer →", pinTitle: "Votre code personnel", validate: "Valider →", forgotId: "Identifiant oublié ?", forgotPin: "Code personnel oublié ?", notClient: "Pas encore client ?", openAccount: "Ouvrir un compte →" },
+    en: { title: "Your ID", remember: "Remember my ID", continue: "Continue →", pinTitle: "Your personal code", validate: "Validate →", forgotId: "Forgot your ID?", forgotPin: "Forgot your personal code?", notClient: "Not a client yet?", openAccount: "Open an account →" },
+    sv: { title: "Ditt ID", remember: "Kom ihåg mitt ID", continue: "Fortsätt →", pinTitle: "Din personliga kod", validate: "Bekräfta →", forgotId: "Glömt ditt ID?", forgotPin: "Glömt din personliga kod?", notClient: "Inte kund ännu?", openAccount: "Öppna ett konto →" },
+    de: { title: "Ihre Kennung", remember: "Meine Kennung speichern", continue: "Weiter →", pinTitle: "Ihr persönlicher Code", validate: "Bestätigen →", forgotId: "Kennung vergessen?", forgotPin: "Persönlichen Code vergessen?", notClient: "Noch kein Kunde?", openAccount: "Konto eröffnen →" },
+    pl: { title: "Twój identyfikator", remember: "Zapamiętaj mój identyfikator", continue: "Kontynuuj →", pinTitle: "Twój kod osobisty", validate: "Zatwierdź →", forgotId: "Zapomniałeś identyfikatora?", forgotPin: "Zapomniałeś kodu osobistego?", notClient: "Nie jesteś jeszcze klientem?", openAccount: "Otwórz konto →" },
+    it: { title: "Il tuo identificativo", remember: "Ricorda il mio identificativo", continue: "Continua →", pinTitle: "Il tuo codice personale", validate: "Conferma →", forgotId: "Hai dimenticato il tuo ID?", forgotPin: "Hai dimenticato il codice personale?", notClient: "Non sei ancora cliente?", openAccount: "Apri un conto →" }
+  };
+
+  const langSelect = document.getElementById("langSelect");
+  const title = document.getElementById("title");
+  const rememberText = document.getElementById("rememberText");
+  const continueBtn = document.getElementById("continueBtn");
+  const pinTitle = document.getElementById("pinTitle");
+  const validateCodeBtn = document.getElementById("validateCode");
+  const forgotId = document.getElementById("forgotId");
+  const forgotPin = document.getElementById("forgotPin");
+  const notClient = document.getElementById("notClient");
+  const openAccount = document.getElementById("openAccount");
+
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    const t = translations[lang];
+    title.textContent = t.title;
+    rememberText.textContent = t.remember;
+    continueBtn.textContent = t.continue;
+    pinTitle.textContent = t.pinTitle;
+    validateCodeBtn.textContent = t.validate;
+    forgotId.textContent = t.forgotId;
+    forgotPin.textContent = t.forgotPin;
+    notClient.textContent = t.notClient;
+    openAccount.textContent = t.openAccount;
+  });
+</script>
+
+</body>
+</html>

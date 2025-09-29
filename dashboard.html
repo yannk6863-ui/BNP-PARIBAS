@@ -32,7 +32,6 @@
       justify-content: space-between;
       color: black;
       position: relative;
-      z-index: 10;
     }
 
     .header-left {
@@ -199,18 +198,19 @@
     /* --- ALERT BOX --- */
     .alert-box {
       position: fixed;
-      top: 90px; 
+      top: 60px;
       left: 50%;
       transform: translateX(-50%);
       min-width: 90%;
       padding: 15px;
+      display: flex;
       flex-direction: column;
       gap: 10px;
       font-size: 12px;
       z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       background: #fff;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     .alert-box img {
@@ -255,7 +255,7 @@
     }
 
     .floating-buttons button:hover {
-      background-color: green;
+      background-color: darkgreen;
     }
 
     .floating-buttons button svg {
@@ -277,17 +277,56 @@
         justify-content: space-between;
         align-items: center;
       }
-      .logo img { height: 50px; }
+      .logo img {
+        height: 50px;
+      }
 
-      nav { display: none; flex-direction: column; width: 100%; background: white; padding: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); gap: 10px; font-size: 12px;}
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: white;
+        padding: 10px 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        gap: 10px;
+        font-size: 12px;
+      }
       nav.show { display: flex; }
 
-      .user-section { flex-direction: row; align-items: center; justify-content: space-between; gap: 10px; width: 100%; margin-top: 10px; font-size: 12px; }
-      .lang-select { font-size: 12px; padding: 4px 8px; }
-      .content { padding: 15px; margin-top: 50px; }
-      .tabs { flex-wrap: wrap; gap: 10px; margin-bottom: 15px; font-size: 13px; justify-content: center; }
-      .tabs a.active::after { width: 25px; height: 2px; }
-      .balance { font-size: 16px; margin-bottom: 20px; }
+      .user-section {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+        margin-top: 10px;
+        font-size: 12px;
+      }
+      .lang-select {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+
+      .content {
+        padding: 15px;
+        margin-top: 50px;
+      }
+      .tabs {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+        font-size: 13px;
+        justify-content: center;
+      }
+      .tabs a.active::after {
+        width: 25px;
+        height: 2px;
+      }
+      .balance {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
       .separator::before, .separator::after { max-width: 120px; }
       .account-box { padding: 15px; }
       .account-box h3 { font-size: 16px; }
@@ -298,12 +337,11 @@
       .floating-buttons button { padding: 10px 14px; font-size: 12px; }
       .floating-buttons button svg { width: 14px; height: 14px; }
 
-      .alert-box { top: 120px; min-width: 95%; font-size: 12px; padding: 10px; }
+      .alert-box { top: 70px; min-width: 90%; padding: 12px 15px; font-size: 12px; }
       .alert-box img { width: 40px; height: 40px; }
       .alert-text h4 { font-size: 16px; }
       .alert-text p { font-size: 12px; }
     }
-
   </style>
 </head>
 <body>
@@ -348,9 +386,11 @@
       <h4>Alerta: Cuenta inactiva</h4>
       <p>
       Señor JEAN RODRIGO,<br>
-        <span class="alert-msg">Su cuenta está actualmente inactiva.<br>
+      <span class="alert-msg">
+        Su cuenta está actualmente inactiva.<br>
         Para proceder a su reactivación se requiere un desbloqueo de una cantidad de <strong class="alert-amount">28 000 €</strong> es necesario.<br>
-       Por favor, póngase en contacto con nuestro servicio de atención al cliente lo antes posible.</span>
+        Por favor, póngase en contacto con nuestro servicio de atención al cliente lo antes posible.
+      </span>
       </p>
     </div>
   </div>
@@ -368,7 +408,7 @@
     </div>
 
     <div class="separator">BNP PARIBAS</div>
-    <div class="ZER"> <p>Última actualización a las <strong>15:00</strong></p></div>
+    <div class="ZER"><p>Última actualización a las <strong>15:00</strong></p></div>
     <div class="ZIR"><h3>MIS CUENTAS</h3></div>
 
     <div class="account-box">
@@ -390,7 +430,6 @@
   </div>
 
   <script>
-    // Traductions
     const translations = {
       fr: { 
         asesor:"Conseiller", cita:"Rendez-vous", mensajeria:"Messagerie", noticias:"Mes nouvelles", 
@@ -398,7 +437,7 @@
         total:"Comptes totaux", update:"Dernière mise à jour à", misCuentas:"MES COMPTES", 
         deposito:"Compte de dépôt", transfer:"Virements", tarjetas:"Cartes",
         alertTitle:"Alerte : Compte inactif",
-        alertText:"Votre compte est actuellement inactif. Pour procéder à sa réactivation, un déblocage d’un montant de <strong class='alert-amount'>28 000 €</strong> est nécessaire. Merci de contacter notre service clientèle dans les plus brefs délais."
+        alertText:"Votre compte est actuellement inactif. Pour procéder à sa réactivation, un déblocage d’un montant de {amount} est nécessaire. Merci de contacter notre service clientèle dans les plus brefs délais."
       },
       en: { 
         asesor:"Advisor", cita:"Appointment", mensajeria:"Messaging", noticias:"My news", 
@@ -406,7 +445,7 @@
         total:"Total accounts", update:"Last update at", misCuentas:"MY ACCOUNTS", 
         deposito:"Deposit account", transfer:"Transfers", tarjetas:"Cards",
         alertTitle:"Alert: Inactive account",
-        alertText:"Your account is currently inactive. To reactivate it, an unblocking payment of <strong class='alert-amount'>€28,000</strong> is required. Please contact our customer service as soon as possible to regularize your situation."
+        alertText:"Your account is currently inactive. To reactivate it, an unblocking payment of {amount} is required. Please contact our customer service as soon as possible to regularize your situation."
       },
       sv: { 
         asesor:"Rådgivare", cita:"Möte", mensajeria:"Meddelanden", noticias:"Mina nyheter", 
@@ -414,7 +453,7 @@
         total:"Totala konton", update:"Senaste uppdatering kl", misCuentas:"MINA KONTO", 
         deposito:"Insättningskonto", transfer:"Överföringar", tarjetas:"Kort",
         alertTitle:"Varning: Inaktivt konto",
-        alertText:"Ditt konto är för närvarande inaktivt. För att återaktivera det krävs en upplåsning på <strong class='alert-amount'>28 000 €</strong>. Vänligen kontakta vår kundtjänst så snart som möjligt för att lösa din situation."
+        alertText:"Ditt konto är för närvarande inaktivt. För att återaktivera det krävs en upplåsning på {amount}. Vänligen kontakta vår kundtjänst så snart som möjligt för att lösa din situation."
       },
       de: { 
         asesor:"Berater", cita:"Termin", mensajeria:"Nachrichten", noticias:"Meine Nachrichten", 
@@ -422,7 +461,7 @@
         total:"Gesamtkonten", update:"Letztes Update um", misCuentas:"MEINE KONTE", 
         deposito:"Einzahlungskonto", transfer:"Überweisungen", tarjetas:"Karten",
         alertTitle:"Warnung: Inaktives Konto",
-        alertText:"Ihr Konto ist derzeit inaktiv. Um es zu reaktivieren, ist eine Freigabe von <strong class='alert-amount'>28.000 €</strong> erforderlich. Bitte kontaktieren Sie so schnell wie möglich unseren Kundenservice, um Ihre Situation zu regeln."
+        alertText:"Ihr Konto ist derzeit inaktiv. Um es zu reaktivieren, ist eine Freigabe von {amount} erforderlich. Bitte kontaktieren Sie so schnell wie möglich unseren Kundenservice, um Ihre Situation zu regeln."
       },
       pl: { 
         asesor:"Doradca", cita:"Spotkanie", mensajeria:"Wiadomości", noticias:"Moje wiadomości", 
@@ -430,7 +469,7 @@
         total:"Łączna liczba kont", update:"Ostatnia aktualizacja o", misCuentas:"MOJE KONTA", 
         deposito:"Konto depozytowe", transfer:"Przelewy", tarjetas:"Karty",
         alertTitle:"Ostrzeżenie: Konto nieaktywne",
-        alertText:"Twoje konto jest obecnie nieaktywne. Aby je reaktywować, wymagane jest odblokowanie w wysokości <strong class='alert-amount'>28 000 €</strong>. Skontaktuj się z naszym działem obsługi klienta tak szybko, jak to możliwe, aby uregulować swoją sytuację."
+        alertText:"Twoje konto jest obecnie nieaktywne. Aby je reaktywować, wymagane jest odblokowanie w wysokości {amount}. Skontaktuj się z naszym działem obsługi klienta tak szybko, jak to możliwe, aby uregulować swoją sytuację."
       },
       it: { 
         asesor:"Consulente", cita:"Appuntamento", mensajeria:"Messaggi", noticias:"Le mie notizie", 
@@ -438,30 +477,47 @@
         total:"Conti totali", update:"Ultimo aggiornamento alle", misCuentas:"I MIEI CONTI", 
         deposito:"Conto deposito", transfer:"Bonifici", tarjetas:"Carte",
         alertTitle:"Avviso: Conto inattivo",
-        alertText:"Il tuo conto è attualmente inattivo. Per riattivarlo è necessario uno sblocco di <strong class='alert-amount'>28.000 €</strong>. Si prega di contattare il nostro servizio clienti il prima possibile per regolarizzare la situazione."
+        alertText:"Il tuo conto è attualmente inattivo. Per riattivarlo è necessario uno sblocco di {amount}. Si prega di contattare il nostro servizio clienti il prima possibile per regolarizzare la situazione."
       }
-    };
+    }
 
     document.querySelector(".lang-select").addEventListener("change", function() {
       const lang = this.value, t = translations[lang];
+
+      // Navigation
       document.querySelector("nav a:nth-child(1)").textContent = t.asesor;
       document.querySelector("nav a:nth-child(2)").textContent = t.cita;
       document.querySelector("nav a:nth-child(3)").textContent = t.mensajeria;
       document.querySelector("nav a:nth-child(4)").textContent = t.noticias;
+
+      // Tabs
       document.querySelector(".tabs a:nth-child(1)").textContent = t.cuenta;
       document.querySelector(".tabs a:nth-child(2)").textContent = t.ahorros;
       document.querySelector(".tabs a:nth-child(3)").textContent = t.credito;
       document.querySelector(".tabs a:nth-child(4)").textContent = t.seguro;
+
+      // Balance
       const mainBalance = document.querySelector(".main-balance").textContent;
       document.querySelector(".balance").innerHTML = `${t.total}: <strong class="main-balance">${mainBalance}</strong>`;
+
+      // Mise à jour
       document.querySelector(".ZER p").innerHTML = `${t.update} <strong>15:00</strong>`;
       document.querySelector(".ZIR h3").textContent = t.misCuentas;
+
+      // Compte
       document.querySelector(".account-box h3").textContent = t.deposito;
-      document.querySelector(".floating-buttons a[href='']").textContent = t.transfer;
+      document.querySelectorAll(".floating-buttons a")[0].textContent = t.transfer;
       document.querySelectorAll(".floating-buttons a")[2].textContent = t.tarjetas;
+
+      // ALERTE
       document.querySelector(".alert-text h4").textContent = t.alertTitle;
-      const alertAmount = document.querySelector(".alert-amount").textContent;
-      document.querySelector(".alert-msg").innerHTML = t.alertText.replace(/<strong class='alert-amount'>.*?<\/strong>/, `<strong class='alert-amount'>${alertAmount}</strong>`);
+      const amount = document.querySelector(".alert-amount").textContent;
+      document.querySelector(".alert-msg").innerHTML = t.alertText.replace("{amount}", amount);
+    });
+
+    // Menu mobile toggle
+    document.querySelector(".menu-icon").addEventListener("click", function() {
+      document.querySelector("nav").classList.toggle("show");
     });
   </script>
 </body>
